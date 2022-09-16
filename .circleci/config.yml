@@ -18,12 +18,12 @@ jobs:
           python manage.py test taskManager
 
   oast:
-    machine:
-      image: hysnsec/safety
+    docker:
+      - image: hysnsec/safety
     steps:
       - checkout
       
-      - run: check -r /src/requirements.txt --json | tee oast-results.json
+      - run: check -r requirements.txt --json | tee oast-results.json
 
       - store_artifacts:
           path: oast-results.json
