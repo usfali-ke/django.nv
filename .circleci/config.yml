@@ -32,21 +32,20 @@ jobs:
       - image: python:3.6
     steps:
       - checkout
-      - run: echo "This is a deploy step"
-
-  artifact:
-    docker:
-      - image: python:3.6
-    steps:
-      - checkout
-      - run: echo "hello" > hello.txt
+      - run: echo "This is a deploy step."
 
 workflows:
   version: 2
   django:
     jobs:
       - build
-      - test
-      - integration
-      - prod
-      - artifact
+      - test:
+          requires:
+            - build 
+      - integration:
+          requires:
+            - test
+      - prod:
+          type: approval
+          requires:
+            - integration
