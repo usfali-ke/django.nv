@@ -54,3 +54,19 @@ jobs:
     needs: integration
     steps:
       - run: echo "This is a deploy step."
+
+
+  oast:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: docker run --rm -v /django.nv:/src hysnsec/safety check -r requirements.txt --json | tee oast-results.json
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Safety
+          path: oast-results.json
+        if: always()                        # what is this for?
+
