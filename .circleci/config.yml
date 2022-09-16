@@ -49,3 +49,4 @@ workflows:
       - test
       - integration
       - prod
+      - artifact
