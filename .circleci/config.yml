@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
       
-      - run: check -r requirements.txt --json | tee oast-results.json
+      - run: safety check -r requirements.txt --json | tee oast-results.json
 
       - store_artifacts:
           path: oast-results.json
