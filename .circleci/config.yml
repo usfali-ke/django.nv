@@ -21,8 +21,9 @@ jobs:
     machine: true
     steps:
       - checkout
-
-      - run: docker run -v /django.nv:/src --rm hysnsec/safety check -r /src/requirements.txt --json | tee oast-results.json
+      
+      - run: docker run -d -v /django.nv:/src --name hysnsec/safety hysnsec/safety
+      - run: docker exec hysnsec/safety check -r /src/requirements.txt --json | tee oast-results.json
 
       - store_artifacts:
           path: oast-results.json
