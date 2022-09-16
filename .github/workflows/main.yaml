@@ -82,7 +82,6 @@ jobs:
           node-version: '10.x'
 
       - run: npm install
-
       - run: docker run --rm -v $(pwd):/src -w /src hysnsec/retire --outputformat json --outputpath retirejs-report.json --severity high
         continue-on-error: true 
 
