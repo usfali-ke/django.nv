@@ -18,14 +18,12 @@ jobs:
           python manage.py test taskManager
 
   oast:
-    machine: true
+    machine:
+      image: hysnsec/safety
     steps:
       - checkout
       
-      - run: 
-          command: |
-              docker run -d -v /django.nv:/src --name safety hysnsec/safety
-              docker exec safety check -r /src/requirements.txt --json | tee oast-results.json
+      - run: check -r /src/requirements.txt --json | tee oast-results.json
 
       - store_artifacts:
           path: oast-results.json
