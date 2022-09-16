@@ -62,7 +62,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: docker run --rm -v /django.nv:/src hysnsec/safety check -r requirements.txt --json | tee oast-results.json
+      - run: docker run --rm -v $(pwd):/src hysnsec/safety check -r /src/requirements.txt --json | tee oast-results.json
         continue-on-error: true             # allow the build to fail, similar to "allow_failure: true" in GitLab
 
       - uses: actions/upload-artifact@v2
