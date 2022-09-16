@@ -26,4 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "This is a deploy step"
+
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello" > hello.txt
    
