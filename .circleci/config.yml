@@ -32,13 +32,16 @@ jobs:
           destination: safety-artifact
 
   oast-retire:
-    machine: true
+    docker:
+       - image: node:alpine3.10
     steps:
       - checkout
 
       - run:
           command: |
-              docker run --rm -v $(pwd):/src -w /src hysnsec/retire --outputformat json --outputpath retirejs-output.json --severity high
+              npm install
+              npm install -g retire
+              retire --outputformat json --outputpath retirejs-report.json --severity high
 
       - store_artifacts:
           path: retirejs-output.json
