@@ -37,6 +37,7 @@ jobs:
 
       - run:
           command: |
+              npm install
               retire --outputformat json --outputpath retirejs-output.json --severity high
 
       - store_artifacts:
