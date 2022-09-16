@@ -22,8 +22,10 @@ jobs:
     steps:
       - checkout
       
-      - run: docker run -d -v /django.nv:/src --name safety hysnsec/safety
-      - run: docker exec safety check -r /src/requirements.txt --json | tee oast-results.json
+      - run: 
+          command: |
+              docker run -d -v /django.nv:/src --name safety hysnsec/safety
+              docker exec safety check -r /src/requirements.txt --json | tee oast-results.json
 
       - store_artifacts:
           path: oast-results.json
@@ -34,7 +36,9 @@ jobs:
     steps:
       - checkout
 
-      - run: docker run --rm -v $(pwd):/src -w /src hysnsec/retire --outputformat json --outputpath retirejs-output.json --severity high
+      - run:
+          command: |
+              docker run --rm -v $(pwd):/src -w /src hysnsec/retire --outputformat json --outputpath retirejs-output.json --severity high
 
       - store_artifacts:
           path: retirejs-output.json
