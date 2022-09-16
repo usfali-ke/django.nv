@@ -40,11 +40,12 @@ jobs:
       - run:
           command: |
               npm install
+              npm audit --json | tee retirejs-report2.json
               npm install -g retire
               retire --outputformat json --outputpath retirejs-report.json --severity high
 
       - store_artifacts:
-          path: retirejs-output.json
+          path: retirejs-report2.json
           destination: retirejs-artifact
 
   integration:
