@@ -31,19 +31,16 @@ jobs:
 
   oast-retire:
     docker:
-       - image: node:alpine3.10
+       - image: hysnsec/retire
     steps:
       - checkout
 
       - run:
           command: |
-              npm install
-              npm audit --json | tee retirejs-report2.json
-              npm install -g retire
-              retire --outputformat json --outputpath retirejs-report.json --severity high
+              retire --outputformat json --outputpath retirejs-output.json --severity high
 
       - store_artifacts:
-          path: retirejs-report2.json
+          path: retirejs-output.json
           destination: retirejs-artifact
 
   integration:
