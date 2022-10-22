@@ -13,6 +13,7 @@ steps:
 
 - script: |
     pushd '$(projectRoot)'
+    pip install -r requirements.txt
     python manage.py test
   displayName: 'Run tests'
   
