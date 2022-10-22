@@ -23,9 +23,16 @@ steps:
     pip install -r requirements.txt
     python manage.py test
   displayName: 'Run tests'
+
+- script: |
+    # pushd '$(projectRoot)'
+    docker pull hysnsec/bandit
+    docker run --user $(id -u):$(id -g) -v $(pwd):/src --rm hysnsec/bandit -b /src/baseline.json -r /src -f json -o /src/bandit-output-nofp.json
+  displayName: 'Run SAST - Bandit'
   
 - task: SnykSecurityScan@1
   inputs:
+    script: 'pip install -r requirements.txt'
     serviceConnectionEndpoint: 'apare_snyk'
     testType: 'app'
     monitorWhen: 'never'
