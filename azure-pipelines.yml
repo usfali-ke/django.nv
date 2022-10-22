@@ -24,3 +24,9 @@ steps:
     python manage.py test
   displayName: 'Run tests'
   
+- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'apare_snyk'
+    testType: 'app'
+    monitorWhen: 'never'
+    failOnIssues: true
