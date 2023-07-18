@@ -31,7 +31,8 @@ steps:
     # pushd '$(projectRoot)'
     docker pull hysnsec/bandit
     docker run --user $(id -u):$(id -g) -v $(pwd):/src --rm hysnsec/bandit -r /src -f json -o /src/bandit-output-nofp.json
-  condition: always()
+  # condition: always()
+  continueOnError: true
   displayName: 'Run SAST - Bandit'
   
 - task: SnykSecurityScan@1
@@ -41,6 +42,6 @@ steps:
     testType: 'app'
     monitorWhen: 'never'
     # failOnIssues: true
-    continueOnError: true
+  continueOnError: true
 
 
