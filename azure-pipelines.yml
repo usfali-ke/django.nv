@@ -7,20 +7,20 @@ trigger:
 - main
 
 pool:
-  vmImage: python:3.9
+  vmImage: ubuntu:latest
 
 steps:
 
 - script: |
     pushd '$(projectRoot)'
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
     python manage.py check
   displayName: 'Run build'
 
 
 - script: |
     # pushd '$(projectRoot)'
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
     python manage.py test
   displayName: 'Run tests'
 
