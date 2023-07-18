@@ -17,9 +17,8 @@ pool:
 
 steps:
 - task: UsePythonVersion@0
-  displayName: 'Use Python $(python.version)'
   inputs:
-    versionSpec: '$(python.version)'
+    versionSpec: '3.11'
 
 - script: |
     pushd '$(projectRoot)'
