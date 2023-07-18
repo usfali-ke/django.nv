@@ -8,8 +8,18 @@ trigger:
 
 pool:
   vmImage: ubuntu:latest
+  strategy:
+    matrix:
+      Python38:
+        python.version: '3.8'
+      Python39:
+        python.version: '3.9'
 
 steps:
+- task: UsePythonVersion@0
+  displayName: 'Use Python $(python.version)'
+  inputs:
+    versionSpec: '$(python.version)'
 
 - script: |
     pushd '$(projectRoot)'
