@@ -49,3 +49,5 @@ The only mail sent by the app is for the "Forgot Password" feature. You can use 
 If you prefer to use your own mailserver, simply add your settings to `settings.py`.
 
 AppSec EU is awesome!
+
+Added sonarcloud tests....
